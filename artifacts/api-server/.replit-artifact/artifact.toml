@@ -1,0 +1,27 @@
+kind = "api"
+previewPath = "/api"
+title = "API Server"
+version = "1.0.0"
+id = "3B4_FFSkEVBkAeYMFRJ2e"
+
+[[services]]
+localPort = 8080
+name = "API Server"
+paths = ["/api"]
+
+[services.development]
+run = "bash /home/runner/workspace/artifacts/api-server/start.sh"
+
+[services.production]
+
+[services.production.build]
+args = ["bash", "/home/runner/workspace/artifacts/api-server/prod_build.sh"]
+
+[services.production.run]
+args = ["bash", "/home/runner/workspace/artifacts/api-server/prod_run.sh"]
+
+[services.production.health.startup]
+path = "/api/healthz"
+
+[services.env]
+PORT = "8080"
