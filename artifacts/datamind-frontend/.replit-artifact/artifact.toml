@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "DataMind AI"
+version = "1.0.0"
+id = "artifacts/datamind-frontend"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23331
+
+[services.development]
+run = "pnpm --filter @workspace/datamind-frontend run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/datamind-frontend", "run", "build" ]
+publicDir = "artifacts/datamind-frontend/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23331"
+BASE_PATH = "/"
